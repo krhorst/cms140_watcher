@@ -5,8 +5,8 @@ describe TweetHandler do
 
   describe "one matching command" do
     before(:each) do
-      @tweet = double("Tweet")
-      @command = double("TweetCommand")
+      @tweet = instance_double("Tweet")
+      @command = instance_double("TweetCommand")
       @tweet_handler = TweetHandler.new(@tweet, [@command])
     end
 
@@ -27,8 +27,8 @@ describe TweetHandler do
 
     before(:each) do
       @tweet = double("Tweet")
-      @command_1 = double("TweetCommand")
-      @command_2 = double("OtherTweetCommand")
+      @command_1 = instance_double("TweetCommand")
+      @command_2 = instance_double("OtherTweetCommand")
       @tweet_handler = TweetHandler.new(@tweet, [@command_1, @command_2])
     end
 
