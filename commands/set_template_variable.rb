@@ -6,9 +6,10 @@ class SetTemplateVariable < BaseCommand
   end
 
   def execute
+    user_name = @tweet.source
     key_name = get_key_name_from_tweet
     value = get_value_from_tweet
-    @persistence.update(key_name, value)
+    @persistence.update(user_name,key_name, value) if key_name.length > 0
   end
 
   def get_key_name_from_tweet
