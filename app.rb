@@ -1,5 +1,7 @@
+current_folder = File.expand_path('../', __FILE__)
+Dir["#{current_folder}/commands/*.rb"].each {|f| require f}
+
 require_relative 'app.env.rb'
-require_relative 'commands/*.rb'
 require 'tweetstream'
 
 TweetStream.configure do |config|
