@@ -10,7 +10,7 @@ class TweetHandler
     @commands.each do |command|
       command_instance = command.new(:tweet => @tweet, :persistence => @persistence)
       if command_instance.meets_criteria
-        command_instance.execute(@tweet)
+        command_instance.execute
         break
       end
     end

@@ -11,13 +11,13 @@ describe ParsePersistence do
 
   it "should initialize a client" do
     expect(Parse).to receive(:create)
-    @parse_persistence = ParsePersistence.new(:application_id => "", :api_key => "")
+    @parse_persistence = ParsePersistence.new(:app_id => "", :api_key => "")
   end
 
   describe "get_page" do
 
     before(:each) do
-      @parse_persistence = ParsePersistence.new(:application_id => "", :api_key => "")
+      @parse_persistence = ParsePersistence.new(:app_id => "", :api_key => "")
       @mock_query = instance_double("FakeQuery")
       expect(@fake_parse_client).to receive(:query).with("Page").and_return(@mock_query)
       expect(@mock_query).to receive(:eq).with("user", "username").and_return(@mock_query)
@@ -81,6 +81,10 @@ describe ParsePersistence do
 
       it "should not set the key if trying to set id" do
         @parse_persistence.set_key("user", "updatedAt", "value")
+      end
+
+      it "should not set the key if trying to set id" do
+        @parse_persistence.set_key("user", "user", "value")
       end
 
     end

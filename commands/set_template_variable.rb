@@ -6,10 +6,10 @@ class SetTemplateVariableCommand < BaseCommand
   end
 
   def execute
-    user_name = @tweet.source
+    user_name = get_username_from_tweet
     key_name = get_key_name_from_tweet
     value = get_value_from_tweet
-    @persistence.update(user_name,key_name, value) if key_name.length > 0
+    @persistence.set_key(user_name,key_name, value) if key_name.length > 0
   end
 
   def get_key_name_from_tweet
@@ -26,6 +26,10 @@ class SetTemplateVariableCommand < BaseCommand
       w unless w.start_with?("#","@",".@")
     end
     filtered_words.compact.join(" ")
+  end
+
+  def get_username_from_tweet
+    @tweet.user.screen_name
   end
 
 end
