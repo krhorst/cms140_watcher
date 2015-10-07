@@ -4,20 +4,22 @@ class ParsePersistence
 
   def initialize(options)
     @parse = Parse.create(:application_id => options[:app_id],
-                 :api_key => options[:api_key],
-                 :quiet  => true)
+                          :api_key => options[:api_key],
+                          :quiet => true)
   end
 
   def set_key(user, key, value)
-    page = get_page(user)
-    page = create_page(user) unless page
-    page[key] = value
-    page.save
+    unless blacklist_keys.include? key
+      page = get_page(user)
+      page = create_page(user) unless page
+      page[key] = value
+      page.save
+    end
   end
 
   def get_page(user)
     query = @parse.query("Page")
-    results = query.eq("user",user).get
+    results = query.eq("user", user).get
     results.first
   end
 
@@ -27,7 +29,11 @@ class ParsePersistence
     page
   end
 
+  private
 
+  def blacklist_keys
+    ["id","createdAt","updatedAt"]
+  end
 
 
 end
