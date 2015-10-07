@@ -12,6 +12,9 @@ TweetStream.configure do |config|
   config.auth_method        = :oauth
 end
 
+parse_persistence = ParsePersistence.new(:application_id => PARSE_APPLICATION_ID, :api_key => PARSE_API_KEY)
+commands = [SetTemplateVariableCommand]
+
 TweetStream::Client.new.userstream do |status|
-  puts status.text
+   TweetHandler.new(:tweet => status,:commands => commands,:persistence => parse_persistence)
 end

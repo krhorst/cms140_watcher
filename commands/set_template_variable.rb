@@ -1,4 +1,4 @@
-class SetTemplateVariable < BaseCommand
+class SetTemplateVariableCommand < BaseCommand
 
 
   def meets_criteria
